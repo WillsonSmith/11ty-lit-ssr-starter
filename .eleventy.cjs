@@ -1,7 +1,8 @@
-const glob = require('glob');
 const { build: esbuild } = require('esbuild');
 
 const litPlugin = require('@lit-labs/eleventy-plugin-lit');
+
+const { asyncGlob } = require('./util/async-glob.cjs');
 
 module.exports = function (eleventyConfig) {
   eleventyConfig.addPlugin(litPlugin, {
@@ -45,16 +46,6 @@ module.exports = function (eleventyConfig) {
   eleventyConfig.addWatchTarget(
     'node_modules/@webcomponents/template-shadowroot'
   );
-};
 
-async function asyncGlob(pattern) {
-  return new Promise((resolve, reject) => {
-    glob(pattern, {}, (err, files) => {
-      if (err) {
-        reject(err);
-      } else {
-        resolve(files);
-      }
-    });
-  });
-}
+  //set default template
+};

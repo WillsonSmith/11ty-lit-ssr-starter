@@ -1,4 +1,22 @@
-<!DOCTYPE html>
+const { asyncGlob } = require('../util/async-glob.cjs');
+
+module.exports = async function ({ content }) {
+  const components = await asyncGlob('./components/**/*.js');
+  const componentUrls = components.map((component) => {
+    return `/components/${component.split(`./components/`)[1]}`;
+  });
+  const preloads = componentUrls
+    .map((component) => {
+      return `<link rel="modulepreload" href="${component}" />`;
+    })
+    .join(`\n`);
+
+  const dynamicImports = componentUrls
+    .map((component) => {
+      return `import('${component}');`;
+    })
+    .join(`\n`);
+  return `<!DOCTYPE html>
 <html>
   <head>
     <!-- As an optimization, immediately begin fetching the JavaScript modules
@@ -8,8 +26,7 @@
       rel="modulepreload"
       href="/node_modules/lit/experimental-hydrate-support.js"
     />
-    <link rel="modulepreload" href="/_js/component1.js" />
-    <link rel="modulepreload" href="/_js/component2.js" />
+    ${preloads}
 
     <!-- On browsers that don't yet support native declarative shadow DOM, a
          paint can occur after some or all pre-rendered HTML has been parsed,
@@ -35,7 +52,7 @@
     </script>
 
     <!-- Pre-rendered Lit components will be generated here. -->
-    {{ content }}
+    ${content}
 
     <!-- At this point, browsers with native shadow DOM support will already
          be able to paint the initial fully styled state your components,
@@ -80,8 +97,9 @@
         // You may also prefer to bundle your components into fewer JS modules.
         // See https://lit.dev/docs/tools/production/#building-with-rollup for
         // more details.
-        import('/components/highlight-text.js');
+        ${dynamicImports}
       })();
     </script>
   </body>
-</html>
+</html>`;
+};
