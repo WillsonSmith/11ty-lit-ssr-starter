@@ -5,5 +5,11 @@ stylesheets:
 ---
 
 <main class="post">
+  <c-layout-item type="full">
+    <img src="{{ headerImage }}" alt="My image alt" />
+  </c-layout-item>
+  <c-layout-item type="full" class="breadcrumbs">
+    <a href="/">Home</a>
+  </c-layout-item>
   <c-layout> {{ content }} </c-layout>
 </main>

@@ -1,6 +1,6 @@
 const { asyncGlob } = require('../../util/async-glob.cjs');
 
-module.exports = async function ({ content, stylesheets }) {
+module.exports = async function ({ content, stylesheets, title = 'Eleventy' }) {
   const components = await asyncGlob('./components/**/*.js');
   const componentUrls = components.map((component) => {
     return `/components/${component.split(`./src/components/`)[1]}`;
@@ -28,7 +28,7 @@ module.exports = async function ({ content, stylesheets }) {
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>Eleventy + Lit</title>
+    <title>${title}</title>
     
     <!-- As an optimization, immediately begin fetching the JavaScript modules
     that we know for sure we'll eventually need. It's important we don't
@@ -37,6 +37,7 @@ module.exports = async function ({ content, stylesheets }) {
     rel="modulepreload"
     href="/node_modules/lit/experimental-hydrate-support.js"
     />
+    ${preloads}
     
     <link rel="stylesheet" href="/css/main.css" />
     ${styles}
