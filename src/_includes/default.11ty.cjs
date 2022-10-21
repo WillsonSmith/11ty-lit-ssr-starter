@@ -1,7 +1,7 @@
 const { asyncGlob } = require('../../util/async-glob.cjs');
 
 module.exports = async function ({ content, stylesheets, title = 'Eleventy' }) {
-  const components = await asyncGlob('./components/**/*.js');
+  const components = await asyncGlob('./src/components/**/*.js');
   const componentUrls = components.map((component) => {
     return `/components/${component.split(`./src/components/`)[1]}`;
   });
@@ -16,7 +16,6 @@ module.exports = async function ({ content, stylesheets, title = 'Eleventy' }) {
       return `import('${component}');`;
     })
     .join(`\n`);
-
   const styles =
     stylesheets
       ?.map((stylesheet) => {
