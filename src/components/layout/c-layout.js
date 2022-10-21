@@ -5,9 +5,9 @@ class Layout extends LitElement {
   static styles = [
     css`
       :host {
-        --gap: clamp(1rem, 6vw, 3rem);
+        --gap: clamp(var(--c-spacing-m), 6vw, var(--c-spacing-l));
         --full: minmax(var(--gap), 1fr);
-        --content: min(50ch, 100% - var(--gap) * 2);
+        --content: min(60ch, 100% - var(--gap) * 2);
         --popout: minmax(0, 2rem);
         --feature: minmax(0, 5rem);
 

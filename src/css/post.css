@@ -1,4 +1,9 @@
 .post img {
+  display: block;
   max-width: 100%;
   height: auto;
+}
+
+.breadcrumbs {
+  padding: var(--c-spacing-xs) var(--c-spacing-sm);
 }

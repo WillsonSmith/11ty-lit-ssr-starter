@@ -16,6 +16,13 @@ module.exports = async function ({ content, stylesheets }) {
       return `import('${component}');`;
     })
     .join(`\n`);
+
+  const styles =
+    stylesheets
+      ?.map((stylesheet) => {
+        return `<link rel="stylesheet" href="${stylesheet}" />`;
+      })
+      .join(`\n`) || ``;
   return `<!DOCTYPE html>
 <html>
   <head>
@@ -32,13 +39,7 @@ module.exports = async function ({ content, stylesheets }) {
     />
     
     <link rel="stylesheet" href="/css/main.css" />
-    ${
-      stylesheets
-        ?.map((stylesheet) => {
-          return `<link rel="stylesheet" href="${stylesheet}" />`;
-        })
-        .join(`\n`) || ``
-    }
+    ${styles}
 
     <!-- On browsers that don't yet support native declarative shadow DOM, a
          paint can occur after some or all pre-rendered HTML has been parsed,
