@@ -1,5 +1,5 @@
 ---
-layout: default.html
+layout: index.html
 ---
 
 # Hello there
