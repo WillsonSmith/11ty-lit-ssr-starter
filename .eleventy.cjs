@@ -1,3 +1,4 @@
+const { sync: globSync } = require('glob');
 const { build: esbuild } = require('esbuild');
 
 const litPlugin = require('@lit-labs/eleventy-plugin-lit');
@@ -5,9 +6,10 @@ const litPlugin = require('@lit-labs/eleventy-plugin-lit');
 const { asyncGlob } = require('./util/async-glob.cjs');
 
 module.exports = function (eleventyConfig) {
+  const componentModules = globSync('./src/components/**/*.js');
   eleventyConfig.addPlugin(litPlugin, {
     mode: 'worker',
-    componentModules: ['src/components/highlight-text.js'],
+    componentModules,
   });
 
   const esbuildConfig = {
@@ -46,6 +48,10 @@ module.exports = function (eleventyConfig) {
   eleventyConfig.addWatchTarget(
     'node_modules/@webcomponents/template-shadowroot'
   );
+
+  eleventyConfig.addWatchTarget('src/css');
+  // passthrough copy
+  eleventyConfig.addPassthroughCopy('src/css');
 
   return {
     dir: {

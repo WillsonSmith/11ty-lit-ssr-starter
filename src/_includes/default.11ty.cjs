@@ -1,6 +1,6 @@
 const { asyncGlob } = require('../../util/async-glob.cjs');
 
-module.exports = async function ({ content }) {
+module.exports = async function ({ content, stylesheets }) {
   const components = await asyncGlob('./components/**/*.js');
   const componentUrls = components.map((component) => {
     return `/components/${component.split(`./src/components/`)[1]}`;
@@ -19,14 +19,24 @@ module.exports = async function ({ content }) {
   return `<!DOCTYPE html>
 <html>
   <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Eleventy + Lit</title>
+    
     <!-- As an optimization, immediately begin fetching the JavaScript modules
-        that we know for sure we'll eventually need. It's important we don't
-        execute them yet, though. -->
+    that we know for sure we'll eventually need. It's important we don't
+    execute them yet, though. -->
     <link
-      rel="modulepreload"
-      href="/node_modules/lit/experimental-hydrate-support.js"
+    rel="modulepreload"
+    href="/node_modules/lit/experimental-hydrate-support.js"
     />
-    ${preloads}
+    
+    <link rel="stylesheet" href="/css/main.css" />
+    ${stylesheets
+      ?.map((stylesheet) => {
+        return `<link rel="stylesheet" href="${stylesheet}" />`;
+      })
+      .join(`\n`)}
 
     <!-- On browsers that don't yet support native declarative shadow DOM, a
          paint can occur after some or all pre-rendered HTML has been parsed,
