@@ -43,6 +43,11 @@ module.exports = function (eleventyConfig) {
     });
   });
 
+  eleventyConfig.addLiquidFilter('imageDimensions', (value) => {
+    const [width, height] = value.split('x');
+    return `width="${width}" height="${height}"`;
+  });
+
   eleventyConfig.addWatchTarget('src/components/');
   eleventyConfig.addWatchTarget('node_modules/lit');
   eleventyConfig.addWatchTarget(
