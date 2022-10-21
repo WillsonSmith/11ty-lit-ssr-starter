@@ -1,9 +1,9 @@
-const { asyncGlob } = require('../util/async-glob.cjs');
+const { asyncGlob } = require('../../util/async-glob.cjs');
 
 module.exports = async function ({ content }) {
   const components = await asyncGlob('./components/**/*.js');
   const componentUrls = components.map((component) => {
-    return `/components/${component.split(`./components/`)[1]}`;
+    return `/components/${component.split(`./src/components/`)[1]}`;
   });
   const preloads = componentUrls
     .map((component) => {

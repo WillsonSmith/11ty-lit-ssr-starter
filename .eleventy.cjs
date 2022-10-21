@@ -7,7 +7,7 @@ const { asyncGlob } = require('./util/async-glob.cjs');
 module.exports = function (eleventyConfig) {
   eleventyConfig.addPlugin(litPlugin, {
     mode: 'worker',
-    componentModules: ['components/highlight-text.js'],
+    componentModules: ['src/components/highlight-text.js'],
   });
 
   const esbuildConfig = {
@@ -19,7 +19,7 @@ module.exports = function (eleventyConfig) {
     allowOverwrite: true,
   };
   eleventyConfig.on('afterBuild', async () => {
-    const files = await asyncGlob('components/**/*.js');
+    const files = await asyncGlob('src/components/**/*.js');
     esbuild({
       entryPoints: files,
       outdir: './_site/components',
@@ -41,11 +41,17 @@ module.exports = function (eleventyConfig) {
     });
   });
 
-  eleventyConfig.addWatchTarget('components/');
+  eleventyConfig.addWatchTarget('src/components/');
   eleventyConfig.addWatchTarget('node_modules/lit');
   eleventyConfig.addWatchTarget(
     'node_modules/@webcomponents/template-shadowroot'
   );
 
+  return {
+    dir: {
+      input: 'src',
+      output: '_site',
+    },
+  };
   //set default template
 };
