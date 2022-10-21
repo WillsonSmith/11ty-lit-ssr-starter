@@ -1,0 +1,7 @@
+ul {
+  margin: 0;
+  padding: 0;
+
+  margin-top: var(--c-spacing-xs);
+  padding-left: var(--c-spacing-m);
+}
