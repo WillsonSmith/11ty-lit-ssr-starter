@@ -5,5 +5,5 @@
 }
 
 .breadcrumbs {
-  padding: var(--c-spacing-xs) var(--c-spacing-sm);
+  margin-top: var(--c-spacing-xs);
 }
