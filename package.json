@@ -1,0 +1,24 @@
+{
+  "name": "ideas.willsonsmith.com",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "type": "module",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev": "NODE_OPTIONS=--experimental-vm-modules eleventy --serve --config=.eleventy.cjs"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "@11ty/eleventy": "^1.0.2",
+    "esbuild": "^0.15.12",
+    "glob": "^8.0.3"
+  },
+  "dependencies": {
+    "@lit-labs/eleventy-plugin-lit": "^0.2.3",
+    "@webcomponents/template-shadowroot": "^0.1.0",
+    "lit": "^2.4.0"
+  }
+}
