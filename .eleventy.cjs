@@ -1,12 +1,10 @@
-const { sync: globSync } = require('glob');
+const litPlugin = require('@lit-labs/eleventy-plugin-lit');
+const { asyncGlob } = require('./util/async-glob.cjs');
+const { sync: syncGlob } = require('glob');
 const { build: esbuild } = require('esbuild');
 
-const litPlugin = require('@lit-labs/eleventy-plugin-lit');
-
-const { asyncGlob } = require('./util/async-glob.cjs');
-
 module.exports = function (eleventyConfig) {
-  const componentModules = globSync('./src/components/**/*.js');
+  const componentModules = syncGlob('./src/components/**/*.js');
   eleventyConfig.addPlugin(litPlugin, {
     mode: 'worker',
     componentModules,
@@ -55,7 +53,6 @@ module.exports = function (eleventyConfig) {
   );
 
   eleventyConfig.addWatchTarget('src/css');
-  // passthrough copy
   eleventyConfig.addPassthroughCopy('src/css');
 
   return {
@@ -64,5 +61,4 @@ module.exports = function (eleventyConfig) {
       output: '_site',
     },
   };
-  //set default template
 };

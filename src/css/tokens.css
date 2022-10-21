@@ -134,6 +134,7 @@
   --c-color-yellow-9: #e67700;
 
   /* Spacing */
+  --c-spacing-xxs: 0.125rem;
   --c-spacing-xs: 0.25rem; /* 4px */
   --c-spacing-sm: 0.5rem; /* 8px */
   --c-spacing-m: 1rem; /* 16px */

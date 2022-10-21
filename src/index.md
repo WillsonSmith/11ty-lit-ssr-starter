@@ -5,4 +5,4 @@ title: "Home"
 
 # Hello there
 
-This is the home page. It's a bit empty, but that's okay.
+This is the <c-highlight>home page</c-highlight>. It's a bit empty, but that's okay.
