@@ -1,6 +1,5 @@
 const litPlugin = require('@lit-labs/eleventy-plugin-lit');
-const { asyncGlob } = require('./util/async-glob.cjs');
-const { sync: syncGlob } = require('glob');
+const { asyncGlob, syncGlob } = require('./util/async-glob.cjs');
 const { build: esbuild } = require('esbuild');
 
 module.exports = function (eleventyConfig) {
