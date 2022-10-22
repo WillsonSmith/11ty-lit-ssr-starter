@@ -1,5 +1,5 @@
 backend:
-  name: git-gateway
+  name: 'git-gateway'
   repo: 'WillsonSmith/11ty-lit-ssr-starter'
   branch: 'netlify-cms'
 publish_mode: editorial_workflow
