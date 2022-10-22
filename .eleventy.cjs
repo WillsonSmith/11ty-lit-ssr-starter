@@ -47,7 +47,14 @@ module.exports = function (eleventyConfig) {
     const md = new markdownIt({ html: true });
     return sanitizeHtml(md.render(value), {
       // generate a list of allowed tags and attributes
-      allowedTags: sanitizeHtml.defaults.allowedTags.concat(['c-highlight']),
+      allowedTags: sanitizeHtml.defaults.allowedTags.concat([
+        'c-highlight',
+        'img',
+      ]),
+      allowedAttributes: {
+        ...sanitizeHtml.defaults.allowedAttributes,
+        img: ['src', 'alt', 'width', 'height', 'title'],
+      },
     });
   });
 
