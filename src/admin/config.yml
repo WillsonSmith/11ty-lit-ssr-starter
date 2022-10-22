@@ -1,5 +1,6 @@
 backend:
   name: git-gateway
+  repo: 'WillsonSmith/11ty-lit-ssr-starter'
   branch: 'netlify-cms'
 publish_mode: editorial_workflow
 media_folder: 'src/images/uploads'
@@ -11,6 +12,7 @@ collections:
     create: true
     slug: '{{year}}-{{month}}-{{day}}-{{slug}}'
     fields:
+      - { label: 'Title', name: 'title', widget: 'string' }
       - widget: list
         name: 'sections'
         fields:
