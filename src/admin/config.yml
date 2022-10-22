@@ -1,11 +1,11 @@
 backend:
   name: 'git-gateway'
-  repo: 'WillsonSmith/11ty-lit-ssr-starter'
+  # repo: 'WillsonSmith/11ty-lit-ssr-starter'
   branch: 'netlify-cms'
 publish_mode: editorial_workflow
 media_folder: 'src/images/uploads'
 public_folder: '/images/uploads'
-local_backend: true
+# local_backend: true
 collections:
   - name: 'posts'
     label: 'Posts'
