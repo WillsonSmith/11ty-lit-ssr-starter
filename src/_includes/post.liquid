@@ -14,6 +14,12 @@ stylesheets:
     <c-layout-item type="popout" class="breadcrumbs">
       <a href="/">Home</a>
     </c-layout-item>
-    {{ content }}
+    {% if sections %}
+      {%- for section in sections -%}
+        <c-layout-item type="{{ section.sectionType}}">
+          {{section.body | markdown }}
+        </c-layout-item>
+      {%- endfor -%}
+    {% endif %}
   </c-layout>
 </main>

@@ -5,6 +5,7 @@ backend:
 publish_mode: editorial_workflow
 media_folder: 'src/images/uploads'
 public_folder: '/images/uploads'
+local_backend: true
 collections:
   - name: 'posts'
     label: 'Posts'
@@ -12,7 +13,14 @@ collections:
     create: true
     slug: '{{year}}-{{month}}-{{day}}-{{slug}}'
     fields:
+      - { label: 'Layout', name: 'layout', widget: 'hidden', default: 'post' }
       - { label: 'Title', name: 'title', widget: 'string' }
+      - label: 'Tags'
+        name: 'tags'
+        widget: 'select'
+        options: ['post']
+        default: [post]
+        multiple: true
       - widget: list
         name: 'sections'
         fields:
@@ -20,5 +28,5 @@ collections:
             name: 'sectionType'
             widget: 'select'
             options: ['content', 'popout', 'feature', 'full']
-            default: ['content']
+            default: 'content'
           - { label: 'Body', name: 'body', widget: 'markdown' }

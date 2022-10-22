@@ -1,6 +1,9 @@
+const sanitizeHtml = require('sanitize-html');
 const litPlugin = require('@lit-labs/eleventy-plugin-lit');
 const { asyncGlob, syncGlob } = require('./util/async-glob.cjs');
 const { build: esbuild } = require('esbuild');
+
+const markdownIt = require('markdown-it');
 
 module.exports = function (eleventyConfig) {
   const componentModules = syncGlob('./src/components/**/*.js');
@@ -37,6 +40,14 @@ module.exports = function (eleventyConfig) {
       entryPoints: ['node_modules/lit/experimental-hydrate-support.js'],
       outdir: '_site/node_modules/lit',
       ...esbuildConfig,
+    });
+  });
+
+  eleventyConfig.addFilter('markdown', (value) => {
+    const md = new markdownIt({ html: true });
+    return sanitizeHtml(md.render(value), {
+      // generate a list of allowed tags and attributes
+      allowedTags: sanitizeHtml.defaults.allowedTags.concat(['c-highlight']),
     });
   });
 
