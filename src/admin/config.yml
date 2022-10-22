@@ -1,0 +1,24 @@
+backend:
+  name: 'git-gateway'
+  repo: 'WillsonSmith/11ty-lit-ssr-starter'
+  branch: 'netlify-cms'
+publish_mode: editorial_workflow
+media_folder: 'src/images/uploads'
+public_folder: '/images/uploads'
+collections:
+  - name: 'posts'
+    label: 'Posts'
+    folder: 'src/posts'
+    create: true
+    slug: '{{year}}-{{month}}-{{day}}-{{slug}}'
+    fields:
+      - { label: 'Title', name: 'title', widget: 'string' }
+      - widget: list
+        name: 'sections'
+        fields:
+          - label: 'Section type'
+            name: 'sectionType'
+            widget: 'select'
+            options: ['content', 'popout', 'feature', 'full']
+            default: ['content']
+          - { label: 'Body', name: 'body', widget: 'markdown' }
